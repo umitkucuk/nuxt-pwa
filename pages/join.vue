@@ -1,22 +1,20 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">nuxt-pwa</h1>
-      <h2 class="subtitle">My kickass Nuxt.js project</h2>
-      <div class="links">
-        <nuxt-link to="/join">Join</nuxt-link>
-      </div>
-    </div>
+    <qrcode-stream @decode="onDecode"></qrcode-stream>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import { QrcodeStream } from 'vue-qrcode-reader'
 
 export default {
   components: {
-    Logo
+    QrcodeStream
+  },
+  methods: {
+    onDecode(decodedString) {
+      alert(decodedString)
+    }
   }
 }
 </script>
