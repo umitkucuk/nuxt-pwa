@@ -70,6 +70,9 @@ export default {
       sending: false
     }
   },
+  beforeDestroy() {
+    this.socket.emit('LEAVE_CHANNEL', this.channelId)
+  },
   methods: {
     onDecode(decodedString) {
       this.channelId = decodedString
@@ -80,9 +83,8 @@ export default {
       this.socket.on('SEND_IMAGE', (data) => {})
     },
     disconnect() {
-      this.socket.emit('LEAVE_CHANNEL', this.channelId, () => {
-        this.$router.push('/')
-      })
+      this.socket.emit('LEAVE_CHANNEL', this.channelId)
+      this.$router.push('/')
     },
     handleSelectImage(event) {
       this.loading = true
