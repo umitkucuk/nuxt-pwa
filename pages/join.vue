@@ -94,10 +94,10 @@ export default {
       }
 
       if (info.file.status === 'done') {
+        this.$message.success('Resim başarıyla yüklendi 🙃')
         getBase64(info.file.originFileObj, (imageUrl) => {
           alert('yüklendi')
           this.selectedImage = imageUrl
-          this.$message.success('Resim başarıyla yüklendi 🙃')
           this.loading = false
           this.sendImage()
         })
