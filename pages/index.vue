@@ -1,11 +1,10 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">Make Image Bigger</h1>
-      <h2 class="subtitle">
+      <h3 class="subtitle">
         Hoşgeldiniz 👋🏼
         <br />Başlamak için bir kanala katılın 👇🏼
-      </h2>
+      </h3>
       <nuxt-link to="/join">
         <a-button type="primary" size="large">Bir kanala katıl</a-button>
       </nuxt-link>
