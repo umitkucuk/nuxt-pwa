@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="channelId" class="qr-scanner">
+    <div v-if="!channelId" class="qr-scanner">
       <qrcode-stream @decode="onDecode"></qrcode-stream>
     </div>
     <div v-else class="channel">
