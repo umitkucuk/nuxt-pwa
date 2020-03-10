@@ -27,7 +27,7 @@
       </div>
 
       <div class="channel-footer">
-        <a-upload
+        <!-- <a-upload
           name="file"
           class="upload-image"
           accept="image/*"
@@ -45,7 +45,8 @@
               {{ loading ? 'Yükleniyor' : 'Resim Yükle' }}
             </a-button>
           </a-tooltip>
-        </a-upload>
+        </a-upload> -->
+        <input type="file" accept="image/*" @change="handleSelectImage" />
       </div>
     </div>
   </div>
@@ -55,10 +56,11 @@
 import io from 'socket.io-client'
 import { QrcodeStream } from 'vue-qrcode-reader'
 
-function getBase64(img, callback) {
+function getBase64(event, callback) {
+  const file = event.target.files[0]
   const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
+  reader.onload = (e) => callback(e.target.result)
+  reader.readAsDataURL(file)
 }
 
 export default {
@@ -87,21 +89,15 @@ export default {
     disconnect() {
       //
     },
-    handleSelectImage(info) {
-      if (info.file.status === 'uploading') {
-        this.loading = true
-      }
-
-      if (info.file.status === 'done') {
+    handleSelectImage(event) {
+      getBase64(event, (imageUrl) => {
         this.$message.success('Resim başarıyla yüklendi 🙃')
-        getBase64(info.file.originFileObj, (imageUrl) => {
-          alert('yüklendi')
-          this.selectedImage = imageUrl
-          this.loading = false
-          this.sendImage()
-        })
-      }
+        this.selectedImage = imageUrl
+        this.loading = false
+        this.sendImage()
+      })
     },
+    handleInputChange(event) {},
     sendImage() {
       this.socket.emit(
         'SEND_IMAGE',
