@@ -1,29 +1,19 @@
 <template>
   <div>
-    <div v-if="channelId" class="qr-scanner">
+    <div v-if="!channelId" class="qr-scanner">
       <qrcode-stream @decode="onDecode"></qrcode-stream>
     </div>
     <div v-else class="channel">
-      <a-tooltip
-        placement="left"
-        title="Buradan kanaldan ayrılabilirsin"
-        :visible="!selectedImage"
-      >
-        <a-button
-          class="disconnect"
-          type="danger"
-          shape="circle"
-          icon="close"
-          @click="disconnect"
-        />
+      <a-tooltip placement="left" title="Buradan kanaldan ayrılabilirsin" :visible="!selectedImage">
+        <a-button class="disconnect" type="danger" shape="circle" icon="close" @click="disconnect" />
       </a-tooltip>
 
       <div class="selected-image">
         <img v-if="selectedImage" :src="selectedImage" />
         <h2 v-else style="text-align: center">
-          Kanala bağlandınız. <br />
-          Resimlerinizi yükleyebilirsiniz. <br />
-          😎
+          Kanala bağlandınız.
+          <br />Resimlerinizi yükleyebilirsiniz.
+          <br />😎
         </h2>
       </div>
 
@@ -42,8 +32,9 @@
             :visible="!selectedImage"
           >
             <a-button>
-              <a-icon :type="loading ? 'loading' : 'plus'" />{{
-                loading ? 'Yükleniyor' : 'Resim Yükle'
+              <a-icon :type="loading ? 'loading' : 'plus'" />
+              {{
+              loading ? 'Yükleniyor' : 'Resim Yükle'
               }}
             </a-button>
           </a-tooltip>
