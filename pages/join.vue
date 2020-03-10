@@ -90,7 +90,6 @@ export default {
     handleSelectImage(info) {
       if (info.file.status === 'uploading') {
         this.loading = true
-        return
       }
 
       if (info.file.status === 'done') {
