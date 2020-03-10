@@ -21,7 +21,7 @@
         <a-upload
           name="file"
           class="upload-image"
-          accept="image/x-png, image/jpeg, image/gif"
+          accept="image/*"
           :multiple="true"
           :show-upload-list="false"
           @change="handleSelectImage"
