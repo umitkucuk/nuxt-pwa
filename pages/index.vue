@@ -1,23 +1,21 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">nuxt-pwa</h1>
-      <h2 class="subtitle">My kickass Nuxt.js project</h2>
-      <div class="links">
-        <nuxt-link to="/join">Join</nuxt-link>
-      </div>
+      <h1 class="title">Make Image Bigger</h1>
+      <h2 class="subtitle">
+        Hoşgeldiniz 👋🏼
+        <br />Başlamak için bir kanala katılın 👇🏼
+      </h2>
+      <nuxt-link to="/join">
+        <a-button type="primary" size="large">Bir kanala katıl</a-button>
+      </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  }
+  components: {}
 }
 </script>
 
