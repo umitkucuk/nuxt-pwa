@@ -1,19 +1,28 @@
 <template>
   <div>
-    <div v-if="!channelId" class="qr-scanner">
+    <div v-if="channelId" class="qr-scanner">
       <qrcode-stream @decode="onDecode"></qrcode-stream>
     </div>
     <div v-else class="channel">
-      <a-tooltip placement="left" title="Buradan kanaldan ayrılabilirsin" :visible="!selectedImage">
-        <a-button class="disconnect" type="danger" shape="circle" icon="close" @click="disconnect" />
+      <a-tooltip
+        placement="left"
+        title="Buradan kanaldan ayrılabilirsin"
+        :visible="!selectedImage"
+      >
+        <a-button
+          class="disconnect"
+          type="danger"
+          shape="circle"
+          icon="close"
+          @click="disconnect"
+        />
       </a-tooltip>
 
       <div class="selected-image">
         <img v-if="selectedImage" :src="selectedImage" />
         <h2 v-else style="text-align: center">
           Kanala bağlandınız.
-          <br />Resimlerinizi yükleyebilirsiniz.
-          <br />😎
+          <br />Resimlerinizi yükleyebilirsiniz. <br />😎
         </h2>
       </div>
 
@@ -33,9 +42,7 @@
           >
             <a-button>
               <a-icon :type="loading ? 'loading' : 'plus'" />
-              {{
-              loading ? 'Yükleniyor' : 'Resim Yükle'
-              }}
+              {{ loading ? 'Yükleniyor' : 'Resim Yükle' }}
             </a-button>
           </a-tooltip>
         </a-upload>
@@ -88,6 +95,7 @@ export default {
 
       if (info.file.status === 'done') {
         getBase64(info.file.originFileObj, (imageUrl) => {
+          alert('yüklendi')
           this.selectedImage = imageUrl
           this.$message.success('Resim başarıyla yüklendi 🙃')
           this.loading = false
