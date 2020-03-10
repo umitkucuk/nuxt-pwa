@@ -7,7 +7,7 @@
       <a-tooltip
         placement="left"
         title="Buradan kanaldan ayrılabilirsin"
-        :visible="!selectedImage"
+        :visible="!loading && !selectedImage"
       >
         <a-button
           class="disconnect"
@@ -27,26 +27,19 @@
       </div>
 
       <div class="channel-footer">
-        <!-- <a-upload
-          name="file"
-          class="upload-image"
-          accept="image/*"
-          :multiple="true"
-          :show-upload-list="false"
-          @change="handleSelectImage"
-        >
+        <div class="upload-button">
           <a-tooltip
             placement="top"
             title="Buradan resim yükleyebilirsin"
-            :visible="!selectedImage"
+            :visible="!loading && !selectedImage"
           >
             <a-button>
               <a-icon :type="loading ? 'loading' : 'plus'" />
               {{ loading ? 'Yükleniyor' : 'Resim Yükle' }}
             </a-button>
           </a-tooltip>
-        </a-upload> -->
-        <input type="file" accept="image/*" @change="handleSelectImage" />
+          <input type="file" accept="image/*" @change="handleSelectImage" />
+        </div>
       </div>
     </div>
   </div>
@@ -87,9 +80,12 @@ export default {
       this.socket.on('SEND_IMAGE', (data) => {})
     },
     disconnect() {
-      //
+      this.socket.emit('LEAVE_CHANNEL', this.channelId, () => {
+        this.$router.push('/')
+      })
     },
     handleSelectImage(event) {
+      this.loading = true
       getBase64(event, (imageUrl) => {
         this.$message.success('Resim başarıyla yüklendi 🙃')
         this.selectedImage = imageUrl
@@ -140,6 +136,28 @@ export default {
     height: 80px;
     background-color: #fff;
     box-shadow: 0 -1px 10px 1px #edf2f7;
+
+    .upload-button {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+
+      input[type='file'] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button {
+        height: 52px;
+        font-size: 22px;
+      }
+    }
   }
 
   .disconnect {
@@ -147,10 +165,5 @@ export default {
     top: 20px;
     right: 20px;
   }
-}
-
-.upload-image button {
-  height: 52px;
-  font-size: 22px;
 }
 </style>
