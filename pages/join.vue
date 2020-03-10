@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     onDecode(decodedString) {
+      this.channelId = decodedString
       this.joinChannel(decodedString)
     },
     joinChannel(channelId) {
