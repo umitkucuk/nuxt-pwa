@@ -15,7 +15,9 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "ant-design-vue": "^1.1.10",
     "nuxt": "^2.0.0",
+    "qrcode.vue": "^1.7.0",
     "socket.io-client": "^2.3.0",
+    "uuid": "^7.0.2",
     "vue-qrcode-reader": "^2.1.1"
   },
   "devDependencies": {

@@ -97,16 +97,10 @@ export default {
     },
     handleInputChange(event) {},
     sendImage() {
-      this.socket.emit(
-        'SEND_IMAGE',
-        {
-          channel_id: this.channelId,
-          image: this.selectedImage
-        },
-        () => {
-          // this.$message.success('Resim başarıyla gönderildi 🙃')
-        }
-      )
+      this.socket.emit('SEND_IMAGE', {
+        channel_id: this.channelId,
+        image: this.selectedImage
+      })
     }
   }
 }
